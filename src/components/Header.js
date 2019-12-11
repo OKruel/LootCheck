@@ -8,7 +8,7 @@ export const Header = props => (
         <Link to='/'> Home </Link>
         <Link to='/wallet' style={{ padding: '5px' }}>
             Wallet
-                </Link>
+        </Link>
         <hr></hr>
     </div>
 )

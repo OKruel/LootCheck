@@ -1,7 +1,9 @@
 //!Imports from React
 import React, { Component } from 'react'
 //!Imports from Redux and React-Redux
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+import { read_cookie } from 'sfcookies';
 
 import * as ACTION from '../store/actions/balance'
 import * as fetchBitcoinAction from '../store/actions/bitcoin'
@@ -32,10 +34,14 @@ export class Wallet extends Component {
     render() {
         return (
             <div >
-                {console.log('Props no render()', this.props)}
                 <h2 >Wallet Deposit: {this.props.deposit}</h2>
                 <h2> Wallet Withdrawal: {this.props.withdrawal} </h2>
-                <h2 className='balance' >Wallet Balance: {this.props.balance}</h2>
+                <h2 className='balance' >Wallet Balance: {
+                    read_cookie('balance') ?
+                        read_cookie('balance').balance :
+                        this.props.balance
+                }
+                </h2>
                 <hr></hr>
                 <input className='input-wallet' type='text' onChange={event => this.updateBalance(event)} />
                 <button className='btn-deposit' onClick={this.deposit}> Deposit </button>
@@ -48,7 +54,6 @@ export class Wallet extends Component {
     }
 }
 
-
 function mapDispatchToProps(dispatch) {
     return {
         depositAction: value => dispatch(ACTION.deposit(value)),
@@ -59,9 +64,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-
 function mapStateToProps(state) {
-    console.log('Map state to props', state)
     return {
         balance: state.balance.balance,
         deposit: state.balance.deposit,

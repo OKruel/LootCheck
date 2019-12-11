@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Loot extends Component {
-
-
     computeBitcoin() {
         const { bitcoin } = this.props
         if (Object.keys(bitcoin).length === 0) return '';

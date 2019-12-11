@@ -8,7 +8,7 @@ const bitcoin = (state = initialState, action) => {
     switch (action.type) {
         case action_types.FETCH_BITCOIN:
             return action.bitcoin
-        default: 
+        default:
             return state;
     }
 }
